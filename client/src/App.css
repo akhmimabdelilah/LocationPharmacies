@@ -36,3 +36,33 @@
     transform: rotate(360deg);
   }
 }
+
+.footer_container{
+  background-color: rgba(248,249,250);
+}
+
+.footer{
+  /* width: 100%; */
+  /* position: absolute;
+  bottom: 0;
+  left:0; */
+}
+
+.footer ul{
+  list-style: none;
+  text-align: left;
+}
+
+.footer ul li a{
+  color:black;
+  text-decoration: none;
+}
+
+/* .mainApp{
+  display: ;
+} */
+
+.cardsContainer{
+  margin: 15px 5px;
+  padding: 15px 5px;
+}

@@ -16,6 +16,7 @@ cityRouter.post('/cities', (req, res) => {
             res.status(500).json({ error: err.message });
         });
 });
+
 // get all cities
 cityRouter.get('/cities', (req, res, next) => {
     City.find().then(cities => {
