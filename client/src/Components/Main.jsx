@@ -164,7 +164,7 @@ const Main = () => {
                     pharmacies?.length ?
                         <>
                             <Cards data={pharmacies}/>
-                            <Map data={pharmacies} width={1000} height={500}/>
+                            <Map data={pharmacies}/>
                         </>
                     :
                     <div>Not Found!</div>
