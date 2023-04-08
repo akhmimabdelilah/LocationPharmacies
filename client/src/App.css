@@ -58,11 +58,13 @@
   text-decoration: none;
 }
 
-/* .mainApp{
-  display: ;
-} */
+.mainApp .card:hover{
+  background-color: #eee;
+  box-shadow: 1px 1px 1px #282c34;
+}
 
 .cardsContainer{
   margin: 15px 5px;
   padding: 15px 5px;
 }
+

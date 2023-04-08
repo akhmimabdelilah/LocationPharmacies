@@ -6,8 +6,8 @@ import Cards from './Cards';
 
 
 const gardeData = [
-    { vale: 'dat', label: 'Day' },
-    { value: 'night', label: 'Night' },
+    { vale: 'jour', label: 'Jour' },
+    { value: 'nuit', label: 'Nuit' },
 ]
 
 const URL = 'http://127.0.0.1:9000';
@@ -43,12 +43,6 @@ function reducer(state, action) {
 
 
 const Main = () => {
-    // const [cities, setCities] = useState(null);
-    // const [city, setCity] = useState(null);
-    // const [zones, setZones] = useState(null);
-    // const [zone, setZone] = useState(null);
-    // const [garde, setGarde] = useState(null);
-
     const [state, dispatch] = useReducer(reducer, initialState);
     const [pharmacies, setPharmacies] = useState(null);
 
@@ -57,7 +51,6 @@ const Main = () => {
             .then(response => response.json())
             .then(data => {
                 const options = data.map(item => ({ value: item.id, label: item.name }));
-                // setCities(options);
                 dispatch({type: 'SET_CITIES', payload: options});
             })
             .catch(error => console.error(error));
@@ -66,7 +59,6 @@ const Main = () => {
             .then(response => response.json())
             .then(data => {
                 const options = data.map(item => ({ value: item.id, label: item.name }));
-                // setZones(options);
                 dispatch({type: 'SET_ZONES', payload: options});
             })
             .catch(error => console.error(error));
@@ -77,21 +69,16 @@ const Main = () => {
     const isZone = !state.zone;
 
     const handleCityChange = data => {
-        // setCity(data);
-        // setZone(null);
         dispatch({type: 'SET_CITY', payload: data});
         dispatch({type: 'SET_ZONE', payload: null});
     };
 
     const handleZoneChange = data => {
-        // setZone(data);
-        // setGarde(null);
         dispatch({type: 'SET_ZONE', payload: data});
         dispatch({type: 'SET_GARDE', payload: null});
     }
 
     const handleGardeChange = data => {
-        // setGarde(data);
         dispatch({type: 'SET_GARDE', payload: data});
     }
 
@@ -129,7 +116,7 @@ const Main = () => {
                 </div>
             </div>
 
-            <div className='cardsContainer row mx-3'>
+            <div className='cardsContainer row mx-3 justify-content-center'>
                 <Cards/>
             </div>
         </div>
