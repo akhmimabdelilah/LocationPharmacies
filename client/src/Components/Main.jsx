@@ -127,7 +127,7 @@ const Main = () => {
                 </div>
             </div>
 
-            <div className='cardsContainer row'>
+            <div className='cardsContainer row mx-3'>
                 <Cards/>
             </div>
         </div>
