@@ -154,7 +154,6 @@ const Main = () => {
                         <Button 
                             onClick={handleRestPharmacies} 
                             variant="outline-success"
-                            // disabled={isGarde}
                             className='mx-2'
                         >
                             Reset
@@ -176,7 +175,10 @@ const Main = () => {
                 :
                 getData ?
                     pharmacies?.length ?
-                        <>  
+                        <>
+                        <div className='my-3'>
+                           <h3>Nombre de pharmacies trouvées : <span className='text-success'>{pharmacies.length}</span></h3>
+                        </div>
                         <Cards data={pharmacies}/>
                         <Map data={pharmacies}/>
                         </>
