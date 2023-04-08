@@ -10,6 +10,8 @@ const gardeData = [
     { value: 'night', label: 'Night' },
 ]
 
+const URL = 'http://127.0.0.1:9000';
+
 const defaultCity = { value: "city", label: "Select City" };
 const defaultZone = { value: "zone", label: "Select City" };
 const defaultGarde = { value: "garde", label: "Select Garde" };
@@ -24,7 +26,7 @@ const Main = () => {
     const [pharmacies, setPharmacies] = useState(null);
 
     useEffect(() => {
-        fetch('http://127.0.0.1:5050/api/cities')
+        fetch(`${URL}/api/cities`)
             .then(response => response.json())
             .then(data => {
                 const options = data.map(item => ({ value: item.id, label: item.name }));
@@ -32,7 +34,7 @@ const Main = () => {
             })
             .catch(error => console.error(error));
 
-        fetch('http://127.0.0.1:5050/api/zones')
+        fetch(`${URL}/api/zones`)
             .then(response => response.json())
             .then(data => {
                 const options = data.map(item => ({ value: item.id, label: item.name }));
