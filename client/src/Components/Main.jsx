@@ -100,15 +100,14 @@ const Main = () => {
                 }
                 setLoading(false);
                 setGetData(true);
-
-                dispatch({type: 'SET_CITY', payload: null});
-                dispatch({type: 'SET_ZONE', payload: null});
-                dispatch({type: 'SET_GARDE', payload: null});
             })
             .catch(error => console.log(error));
     }
 
     const handleRestPharmacies = data => {
+        dispatch({type: 'SET_CITY', payload: null});
+        dispatch({type: 'SET_ZONE', payload: null});
+        dispatch({type: 'SET_GARDE', payload: null});
         setPharmacies(null);
         setGetData(false);
 
@@ -150,14 +149,17 @@ const Main = () => {
                     >
                         Get
                     </Button>
-                    <Button 
-                        onClick={handleRestPharmacies} 
-                        variant="outline-success"
-                        // disabled={isGarde}
-                        className='mx-2'
-                    >
-                        Rest
-                    </Button>
+                    {
+                        pharmacies?.length &&
+                        <Button 
+                            onClick={handleRestPharmacies} 
+                            variant="outline-success"
+                            // disabled={isGarde}
+                            className='mx-2'
+                        >
+                            Reset
+                        </Button>
+                    }
                 </div>
             </div>
 
@@ -174,9 +176,9 @@ const Main = () => {
                 :
                 getData ?
                     pharmacies?.length ?
-                        <>
-                            <Cards data={pharmacies}/>
-                            <Map data={pharmacies}/>
+                        <>  
+                        <Cards data={pharmacies}/>
+                        <Map data={pharmacies}/>
                         </>
                     :
                     <div>Not Found!</div>
