@@ -1,5 +1,7 @@
 const express = require('express');
 const Pharmacie = require('../models/Pharmacie');
+const City = require('../models/City');
+const Zone = require('../models/Zone');
 
 
 const pharmacieRouter = express.Router();
@@ -36,6 +38,59 @@ pharmacieRouter.get('/pharmacies/:id', async (req, res, next) => {
         if (err.kind === 'ObjectId') {
             return res.status(404).json({ msg: 'Pharmacie not found' });
         }
+        res.status(500).send('Server Error');
+    }
+});
+
+// get pharmacy by zone
+pharmacieRouter.get('/pharmacies/zone/:zone', async (req, res, next) => {
+    try {
+        console.log(req.params.zone);
+        const pharmacies = await Pharmacie.find({ zone: req.params.zone });
+        console.log(pharmacies);
+        if (!pharmacies) {
+            return res.status(404).json({ msg: 'Pharmacie not found' });
+        }
+        res.json(pharmacies);
+    } catch (err) {
+        console.error(err.message);
+        if (err.kind === 'ObjectId') {
+            return res.status(404).json({ msg: 'Pharmacie not found' });
+        }
+        res.status(500).send('Server Error');
+    }
+});
+
+
+pharmacieRouter.get('/pharmacies/city/:cityName', async (req, res) => {
+    try {
+        const cityName = req.params.cityName;
+
+        const city = await City.findOne({ name: cityName });
+
+        if (!city) {
+            return res.status(404).json({ message: 'City not found' });
+        }
+
+        const zones = await Zone.find({ city: city._id });
+
+        const pharmacies = await Pharmacie.find({ zone: { $in: zones } });
+
+        res.json({ pharmacies });
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).json({ message: 'Server error' });
+    }
+});
+
+pharmacieRouter.get('/pharmacies/garde/:garde', async (req, res) => {
+    const garde = req.params.garde;
+
+    try {
+        const pharmacies = await Pharmacie.find({ garde: garde });
+        res.json(pharmacies);
+    } catch (err) {
+        console.error(err.message);
         res.status(500).send('Server Error');
     }
 });
