@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import 'leaflet/dist/leaflet.css';
 
 import Header from './Components/Header';
 import Main from './Components/Main';
@@ -14,9 +15,9 @@ import NoPage from './pages/NoFoundPage';
 
 function App() {
   return (
-    <div className="App">
+    <div className="App d-flex flex-column min-vh-100">
       <Header />
-      <div className='container mainApp my-3 py-3'>
+      <div className='container mainApp my-3 py-3 flex-fill'>
         <BrowserRouter>
           <Routes>
             <Route path="/">

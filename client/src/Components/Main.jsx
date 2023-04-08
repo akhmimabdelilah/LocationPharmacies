@@ -1,8 +1,8 @@
 import {React, useEffect, useState, useReducer} from 'react';
-import { Formik, Form } from 'formik';
 import Select from 'react-select'
 import Button from 'react-bootstrap/Button';
 import Cards from './Cards';
+import Map from './Map';
 
 
 const gardeData = [
@@ -45,12 +45,13 @@ function reducer(state, action) {
 const Main = () => {
     const [state, dispatch] = useReducer(reducer, initialState);
     const [pharmacies, setPharmacies] = useState(null);
+    const [getData, setGetData] = useState(false);
 
     useEffect(() => {
         fetch(`${URL}/api/cities`)
             .then(response => response.json())
             .then(data => {
-                const options = data.map(item => ({ value: item.id, label: item.name }));
+                const options = data.map(item => ({ value: item._id, label: item.name }));
                 dispatch({type: 'SET_CITIES', payload: options});
             })
             .catch(error => console.error(error));
@@ -58,7 +59,7 @@ const Main = () => {
         fetch(`${URL}/api/zones`)
             .then(response => response.json())
             .then(data => {
-                const options = data.map(item => ({ value: item.id, label: item.name }));
+                const options = data.map(item => ({ value: item._id, label: item.name }));
                 dispatch({type: 'SET_ZONES', payload: options});
             })
             .catch(error => console.error(error));
@@ -67,10 +68,12 @@ const Main = () => {
 
     const isCity = !state.city;
     const isZone = !state.zone;
+    const isGarde = !state.garde;
 
     const handleCityChange = data => {
         dispatch({type: 'SET_CITY', payload: data});
         dispatch({type: 'SET_ZONE', payload: null});
+        setGetData(false);
     };
 
     const handleZoneChange = data => {
@@ -82,6 +85,31 @@ const Main = () => {
         dispatch({type: 'SET_GARDE', payload: data});
     }
 
+    const handleGetPharmacies = data => {
+        // get pharmacies from mongodb
+        fetch(`${URL}/api/pharmacies/${state.garde.value}/${state.zone.value}/${state.city.value}`)
+            .then(response => response.json())
+            .then(data => {
+                if(data.length){
+                    setPharmacies(data);
+                }
+                else{
+                    console.log("empty");
+                }
+                setGetData(true);
+
+                dispatch({type: 'SET_CITY', payload: null});
+                dispatch({type: 'SET_ZONE', payload: null});
+                dispatch({type: 'SET_GARDE', payload: null});
+            })
+            .catch(error => console.log(error));
+    }
+
+    const handleRestPharmacies = data => {
+        setPharmacies(null);
+        setGetData(false);
+
+    }
     return(
         <div>
             <div className='d-flex justify-content-center'>
@@ -112,12 +140,40 @@ const Main = () => {
                     />
                 </div>
                 <div className='mx-3'>
-                    <Button type="submit" variant="outline-primary">Get</Button>
+                    <Button 
+                        onClick={handleGetPharmacies} 
+                        variant="outline-primary"
+                        disabled={isGarde}
+                    >
+                        Get
+                    </Button>
+                    <Button 
+                        onClick={handleRestPharmacies} 
+                        variant="outline-success"
+                        // disabled={isGarde}
+                        className='mx-2'
+                    >
+                        Rest
+                    </Button>
                 </div>
             </div>
 
             <div className='cardsContainer row mx-3 justify-content-center'>
-                <Cards/>
+
+                { getData ?
+                    pharmacies?.length ?
+                        <>
+                            <Cards data={pharmacies}/>
+                            <Map data={pharmacies} width={1000} height={500}/>
+                        </>
+                    :
+                    <div>Not Found!</div>
+                :
+                    <div>
+                        Search a Pharmacy
+                    </div>
+                }
+
             </div>
         </div>
     )

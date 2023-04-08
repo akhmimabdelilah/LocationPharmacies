@@ -1,3 +1,4 @@
+
 .App {
   text-align: center;
 }
@@ -77,4 +78,11 @@
   opacity:0.8;
   text-decoration: underline;
   color:red;
+}
+
+@media screen and (max-width:750px){
+  .footer{
+    display: block;
+    font-size: 14px;
+  }
 }
