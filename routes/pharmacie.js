@@ -95,6 +95,30 @@ pharmacieRouter.get('/pharmacies/garde/:garde', async (req, res) => {
     }
 });
 
+pharmacieRouter.get('/pharmacies/:garde/:zone/:city', async (req, res) => {
+    const garde = req.params.garde;
+    const zone = req.params.zone;
+    const city = req.params.city;
+  
+    try {
+      const pharmacies = await Pharmacie.find({ garde: garde, zone: zone })
+        .populate({
+          path: 'zone',
+          match: { city: city }
+        })
+        .exec();
+  
+      const filteredPharmacies = pharmacies.filter((pharmacy) => {
+        return pharmacy.zone !== null;
+      });
+  
+      res.json(filteredPharmacies);
+    } catch (err) {
+      console.error(err.message);
+      res.status(500).send('Server Error');
+    }
+  });
+
 pharmacieRouter.put('/pharmacies/:id', async (req, res) => {
     try {
         const pharmacie = await Pharmacie.findByIdAndUpdate(req.params.id, req.body, { new: true });
