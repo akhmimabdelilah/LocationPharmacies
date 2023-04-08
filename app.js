@@ -8,6 +8,7 @@ var cors = require("cors");
 var indexRouter = require('./routes/index');
 var cityRouter = require('./routes/city');
 var zoneRouter = require('./routes/zone');
+var pharmacieRouter = require('./routes/pharmacie');
 // var usersRouter = require('./routes/users');
 var usersRouter = require('./routes/users');
 
@@ -29,6 +30,8 @@ app.use('/', indexRouter);
 app.use("/api", usersRouter);
 app.use('/api',cityRouter);
 app.use('/api',zoneRouter);
+app.use('/api',pharmacieRouter);
+
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
