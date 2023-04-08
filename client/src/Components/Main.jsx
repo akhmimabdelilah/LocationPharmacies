@@ -1,9 +1,9 @@
 import {React, useEffect, useState, useReducer} from 'react';
+import { Dna } from  'react-loader-spinner';
 import Select from 'react-select'
 import Button from 'react-bootstrap/Button';
 import Cards from './Cards';
 import Map from './Map';
-
 
 const gardeData = [
     { vale: 'jour', label: 'Jour' },
@@ -46,6 +46,7 @@ const Main = () => {
     const [state, dispatch] = useReducer(reducer, initialState);
     const [pharmacies, setPharmacies] = useState(null);
     const [getData, setGetData] = useState(false);
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         fetch(`${URL}/api/cities`)
@@ -86,6 +87,7 @@ const Main = () => {
     }
 
     const handleGetPharmacies = data => {
+        setLoading(true);
         // get pharmacies from mongodb
         fetch(`${URL}/api/pharmacies/${state.garde.value}/${state.zone.value}/${state.city.value}`)
             .then(response => response.json())
@@ -96,6 +98,7 @@ const Main = () => {
                 else{
                     console.log("empty");
                 }
+                setLoading(false);
                 setGetData(true);
 
                 dispatch({type: 'SET_CITY', payload: null});
@@ -159,8 +162,17 @@ const Main = () => {
             </div>
 
             <div className='cardsContainer row mx-3 justify-content-center'>
-
-                { getData ?
+                { loading ?
+                    <Dna
+                        visible={true}
+                        height="80"
+                        width="80"
+                        ariaLabel="dna-loading"
+                        wrapperStyle={{}}
+                        wrapperClass="dna-wrapper"
+                    />
+                :
+                getData ?
                     pharmacies?.length ?
                         <>
                             <Cards data={pharmacies}/>

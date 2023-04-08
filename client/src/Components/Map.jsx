@@ -1,4 +1,4 @@
-import '../Map.css';
+// import '../Map.css';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
 import { MapContainer, Marker, Popup, TileLayer} from 'react-leaflet'
