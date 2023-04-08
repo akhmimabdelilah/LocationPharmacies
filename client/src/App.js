@@ -16,7 +16,9 @@ import NoPage from './pages/NoFoundPage';
 function App() {
   return (
     <div className="App d-flex flex-column min-vh-100">
-      <Header />
+      <div className="headerContainer">
+        <Header />
+      </div>
       <div className='container mainApp my-3 py-3 flex-fill'>
         <BrowserRouter>
           <Routes>

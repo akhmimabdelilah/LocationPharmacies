@@ -38,6 +38,10 @@
   }
 }
 
+.headerContainer{
+  box-shadow: 1px 1px 7px #abaaaa;
+}
+
 .footer_container{
   background-color: rgba(248,249,250);
 }
