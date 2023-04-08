@@ -14,10 +14,10 @@ const NavBar = () => {
                     </Navbar.Brand>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
-                        <Nav className="me-auto d-flex justify-content-center">
-                            <Nav.Link href="#home">Accueil</Nav.Link>
-                            <Nav.Link href="#link">A propos</Nav.Link>
-                            <Nav.Link href="#link">Contact</Nav.Link>
+                        <Nav className="me-auto mx-auto">
+                            <Nav.Link className="nav-item" href="/">Accueil</Nav.Link>
+                            <Nav.Link className='nav-item' href="/about">A propos</Nav.Link>
+                            <Nav.Link className='nav-item' href="/contact">Contact</Nav.Link>
                         </Nav>
                     </Navbar.Collapse>
                 </Container>
