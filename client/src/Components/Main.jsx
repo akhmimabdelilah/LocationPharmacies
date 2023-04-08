@@ -96,6 +96,9 @@ const Main = () => {
                     setPharmacies(data);
                 }
                 else{
+                    dispatch({type: 'SET_CITY', payload: null});
+                    dispatch({type: 'SET_ZONE', payload: null});
+                    dispatch({type: 'SET_GARDE', payload: null});
                     console.log("empty");
                 }
                 setLoading(false);
@@ -147,7 +150,7 @@ const Main = () => {
                         variant="outline-primary"
                         disabled={isGarde}
                     >
-                        Get
+                        Search
                     </Button>
                     {
                         pharmacies?.length &&

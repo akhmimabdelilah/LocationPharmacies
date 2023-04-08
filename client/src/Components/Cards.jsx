@@ -4,7 +4,7 @@ import Carousel from 'better-react-carousel'
 function Cards({data}) {
   return (
     <>
-        <Carousel cols={4} rows={3} gap={10} loop>
+        <Carousel cols={3} rows={3} gap={10} loop>
         { data.map((item) => {
             return(
                 <Carousel.Item>
