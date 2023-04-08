@@ -53,11 +53,7 @@ const Main = () => {
     const [pharmacies, setPharmacies] = useState(null);
 
     useEffect(() => {
-<<<<<<< HEAD
         fetch(`${URL}/api/cities`)
-=======
-        fetch('http://127.0.0.1:9000/api/cities')
->>>>>>> 34e1fa3e78ad49201ef816560fef2c0110dbfb41
             .then(response => response.json())
             .then(data => {
                 const options = data.map(item => ({ value: item.id, label: item.name }));
@@ -66,11 +62,7 @@ const Main = () => {
             })
             .catch(error => console.error(error));
 
-<<<<<<< HEAD
         fetch(`${URL}/api/zones`)
-=======
-        fetch('http://127.0.0.1:9000/api/zones')
->>>>>>> 34e1fa3e78ad49201ef816560fef2c0110dbfb41
             .then(response => response.json())
             .then(data => {
                 const options = data.map(item => ({ value: item.id, label: item.name }));
