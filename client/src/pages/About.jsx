@@ -1,7 +1,12 @@
+// import './About.css';
+import Map from '../Components/Map';
+
 
 const About = () => {
-    return(
-        <>About</>
+    return (
+        <>
+            <h1>About page</h1>
+        </>
     )
 }
 
