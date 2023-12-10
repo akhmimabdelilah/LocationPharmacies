@@ -19,11 +19,12 @@ const Map = (props) => {
     return (
         <Container fluid="sm" className='my-3'>
             <Row>
-                <MapContainer center={[33.2472, -8.5067]} zoom={13} scrollWheelZoom={true} style={{ width: '100%', height: '80vh' }}>
+                <MapContainer center={[props.data[0].latitude, props.data[0].longitude]} zoom={13} scrollWheelZoom={true} style={{ width: '100%', height: '80vh' }}>
                     <TileLayer
                         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                     />
+
                     {
                         props.data.map((item => {
                             console.log(item);

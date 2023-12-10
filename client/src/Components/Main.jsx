@@ -5,6 +5,22 @@ import Button from 'react-bootstrap/Button';
 import Cards from './Cards';
 import Map from './Map';
 
+import 'leaflet/dist/leaflet.css';
+import L from 'leaflet';
+import { MapContainer, Marker, Popup, TileLayer} from 'react-leaflet'
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+
+import icon from 'leaflet/dist/images/marker-icon.png';
+import iconShadow from 'leaflet/dist/images/marker-shadow.png';
+
+let DefaultIcon = L.icon({
+    iconUrl: icon,
+    shadowUrl: iconShadow
+});
+
+L.Marker.prototype.options.icon = DefaultIcon;
+
 const gardeData = [
     { vale: 'jour', label: 'Jour' },
     { value: 'nuit', label: 'Nuit' },
@@ -89,7 +105,8 @@ const Main = () => {
     const handleGetPharmacies = data => {
         setLoading(true);
         // get pharmacies from mongodb
-        fetch(`${URL}/api/pharmacies/${state.garde.value}/${state.zone.value}/${state.city.value}`)
+        // fetch(`${URL}/api/pharmacies/${state.garde.value}/${state.zone.value}/${state.city.value}`)
+	fetch(`${URL}/api/pharmacies/nuit/${state.zone.value}/${state.city.value}`)
             .then(response => response.json())
             .then(data => {
                 if(data.length){
@@ -194,6 +211,34 @@ const Main = () => {
                 }
 
             </div>
+	{/* <Container fluid="sm" className='my-3'>
+            <Row>
+                <MapContainer center={[33.2472, -8.5067]} zoom={13} scrollWheelZoom={true} style={{ width: '100%', height: '80vh' }}>
+                    <TileLayer
+                        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                    />
+
+                    
+                       
+                            return(
+                                <Marker position={[33.2472, -8.5067]}>
+                                    <Popup>
+                                        <p>
+                                            <strong>Nom:</strong> 
+                                        </p>
+                                        <p>
+                                            <strong>Address:</strong> 
+                                        </p>
+                                    </Popup>
+                                </Marker>
+                            )
+                        }))
+                    
+                </MapContainer>
+            </Row>
+        </Container> */}
+		
         </div>
     )
 }

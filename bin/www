@@ -29,24 +29,26 @@ var server = http.createServer(app);
 /**
  * Listen on provided port, on all network interfaces.
  */
-mongoose.connect('mongodb+srv://ay0ub:ayoub@cluster0.casrqv3.mongodb.net/citiesManagement?retryWrites=true&w=majority').then(result => {
+  // mongoose.connect('mongodb+srv://ay0ub:ayoub@cluster0.casrqv3.mongodb.net/citiesManagement?retryWrites=true&w=majority').then(result => {
+
+mongoose.connect('mongodb+srv://admin:root@pharmamanagement.o0f7ixd.mongodb.net/?retryWrites=true&w=majority').then(result => {
   console.log('successfully connected');
-  // const c = new City({
-  //   name: 'hello'
+   //const c = new City({
+   // name: 'casablanca'
   // });
   // c.save().then(res => console.log('created city')).catch(err => console.log(err));
 
-  // const zone = new Zone({
-  //   name: 'zone 1',
-  //   city:'6428d047d9fecb6806e627db'
-  // });
-  // zone.save().then(res => console.log('created zone')).catch(err => console.log(err));
-  // City.find().then(cities => console.log(cities)).catch(err => console.log(err));
-  // Zone.find().then(zones => console.log(zones)).catch(err => console.log(err));
-  // User.find().then(zones => console.log(zones)).catch(err => console.log(err));
+  //const zone = new Zone({
+    //name: 'zone Casa',
+     city:'casablanca'
+   //});
+   //zone.save().then(res => console.log('created zone')).catch(err => console.log(err));
 
-  // Zone.find()
-  // .populate('city', 'name').find().then(zones => console.log(zones)).catch(err => console.log(err));
+   City.find().then(cities => console.log(cities)).catch(err => console.log(err));
+   Zone.find().then(zones => console.log(zones)).catch(err => console.log(err));
+   User.find().then(zones => console.log(zones)).catch(err => console.log(err));
+
+   Zone.find().populate('city', 'name').find().then(zones => console.log(zones)).catch(err => console.log(err));
 
   // const ayoub = City.aggregate([
   //   {
